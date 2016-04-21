@@ -11,23 +11,23 @@ import java.util.List;
 /**
  * Created by AGogolev on 21.04.2016.
  */
-public class ExpencesAdapter extends RecyclerView.Adapter<ExpencesAdapter.ExpencesHolder> {
+public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ExpencesHolder> {
 
-    private List<Expence> expenseList;
+    private List<Expense> expenseList;
 
-    public ExpencesAdapter(List<Expence> expenceList){
+    public ExpensesAdapter(List<Expense> expenceList){
         this.expenseList = expenceList;
     }
 
     @Override
-    public ExpencesAdapter.ExpencesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ExpensesAdapter.ExpencesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.expense_item, parent,false);
         return new ExpencesHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ExpencesAdapter.ExpencesHolder holder, int position) {
-        Expence expence = expenseList.get(position);
+    public void onBindViewHolder(ExpensesAdapter.ExpencesHolder holder, int position) {
+        Expense expence = expenseList.get(position);
         holder.description.setText(expence.description);
         holder.price.setText(expence.price);
     }
