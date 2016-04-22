@@ -8,13 +8,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/description"
-        android:padding="10dp"/>
+        android:padding="@dimen/padding_10"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/price"
-        android:padding="10dp"/>
+        android:padding="@dimen/padding_10"/>
 
 </LinearLayout>
