@@ -2,13 +2,15 @@ package com.example.agogolev.moneytracker;
 
 
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         setActionBar();
         setupDrawerLayout();
-        initRecycleView();
+        //initRecycleView();
+        if (savedInstanceState == null){
+            replaceFragment(new FragmentExpenses());
+        }
         Log.d(LOG_TAG, "***-*** onCreate");
     }
 
@@ -57,11 +62,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initRecycleView(){
-        recyclerView = (RecyclerView) findViewById(R.id.list_of_expenses);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
-        recyclerView.setAdapter(expencesAdapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.list_of_expenses);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
+//        recyclerView.setAdapter(expencesAdapter);
     }
+
+    private void replaceFragment(Fragment fragment){
+
+        String backStackName = fragment.getClass().getName();
+        FragmentManager manager = getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStackName,0);
+
+        if (!fragmentPopped && manager.findFragmentByTag(backStackName) == null){
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.main_container, fragment, backStackName);
+            ft.addToBackStack(backStackName);
+            ft.commit();
+
+        }
+    }
+
     private List<Expense> getExpenses(){
         List<Expense> expences = new ArrayList<>();
         expences.add(new Expense("Cinema", "120"));
@@ -80,11 +101,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawerLayout != null) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+        switch (item.getItemId()){
+            case R.id.drawer_expenses:
+                FragmentExpenses ef = new FragmentExpenses();
+                replaceFragment(ef);
+                break;
+            case R.id.drawer_categories:
+                FragmentCategories cf = new FragmentCategories();
+                replaceFragment(cf);
+                break;
+            case R.id.drawer_settings:
+                FragmentSettings sf = new FragmentSettings();
+                replaceFragment(sf);
+                break;
+            case R.id.drawer_statistics:
+                FragmentStatistic stf = new FragmentStatistic();
+                replaceFragment(stf);
+                break;
+        }
+
         return true;
     }
 
     @Override
     public void onBackPressed() {
+
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {

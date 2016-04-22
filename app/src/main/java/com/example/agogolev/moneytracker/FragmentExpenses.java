@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 /**
  * Created by AGogolev on 21.04.2016.
  */
-public class ExpensesFragment extends Fragment{
+public class FragmentExpenses extends Fragment{
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.expenses_fragment,container, false);
+        View rootView = inflater.inflate(R.layout.fragment_expenses,container, false);
         return rootView;
     }
 }

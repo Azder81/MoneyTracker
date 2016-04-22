@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by AGogolev on 21.04.2016.
+ * Created by AGogolev on 22.04.2016.
  */
-public class CategoriesFragment extends Fragment {
+public class FragmentStatistic extends Fragment{
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.categories_fragment, container,false);
+        View rootView = inflater.inflate(R.layout.fragment_statistic, container, false);
         return rootView;
     }
 }

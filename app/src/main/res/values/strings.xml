@@ -8,4 +8,9 @@
     <string name="nav_drawer_settings">Настройки</string>
     <string name="user_name">Александр</string>
     <string name="user_email">Alex@mail.ru</string>
+
+    <string name="fragm_expenses">Фрагмент ЗАТРАТЫ</string>
+    <string name="fragm_categories">Фрагмент КАТЕГОРИИ</string>
+    <string name="fragm_statistic">Фрагмент СТАТИСТИКА</string>
+    <string name="fragm_settings">Фрагмент НАСТРОЙКИ</string>
 </resources>
