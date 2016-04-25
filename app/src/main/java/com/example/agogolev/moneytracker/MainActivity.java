@@ -66,20 +66,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if (fragment_name.contains("FragmentStatistic")){
             setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
         }
-//        switch (id_item){
-//            case R.id.drawer_expenses:
-//                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_expenses));
-//                break;
-//            case R.id.drawer_categories:
-//                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_categories));
-//                break;
-//            case R.id.drawer_settings:
-//                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_settings));
-//                break;
-//            case R.id.drawer_statistics:
-//                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
-//                break;
-//        }
+    }
+
+    private void setMenuActive(String fragment_name){
+        int nItem=R.id.drawer_expenses;
+        if (fragment_name.contains("FragmentExpenses")){
+            nItem=R.id.drawer_expenses;
+            //setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_expenses));
+        }else if (fragment_name.contains("FragmentCategories")){
+            nItem=R.id.drawer_categories;
+//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_categories));
+        }else if (fragment_name.contains("FragmentSettings")){
+            nItem=R.id.drawer_settings;
+//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_settings));
+        }else if (fragment_name.contains("FragmentStatistic")){
+            nItem=R.id.drawer_statistics;
+//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
+        }
+        navigationView.setCheckedItem(nItem);
     }
 
     private void replaceFragment(Fragment fragment){
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
             String fragmentTag = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
             setTitelFragments(fragmentTag);
+            setMenuActive(fragmentTag);
         }
 
     }
