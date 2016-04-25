@@ -72,16 +72,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int nItem=R.id.drawer_expenses;
         if (fragment_name.contains("FragmentExpenses")){
             nItem=R.id.drawer_expenses;
-            //setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_expenses));
         }else if (fragment_name.contains("FragmentCategories")){
             nItem=R.id.drawer_categories;
-//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_categories));
         }else if (fragment_name.contains("FragmentSettings")){
             nItem=R.id.drawer_settings;
-//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_settings));
         }else if (fragment_name.contains("FragmentStatistic")){
             nItem=R.id.drawer_statistics;
-//            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
         }
         navigationView.setCheckedItem(nItem);
     }
@@ -111,22 +107,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawer_expenses:
                 FragmentExpenses ef = new FragmentExpenses();
                 replaceFragment(ef);
-                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_expenses));
                 break;
             case R.id.drawer_categories:
                 FragmentCategories cf = new FragmentCategories();
                 replaceFragment(cf);
-                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_categories));
                 break;
             case R.id.drawer_settings:
                 FragmentSettings sf = new FragmentSettings();
                 replaceFragment(sf);
-                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_settings));
                 break;
             case R.id.drawer_statistics:
                 FragmentStatistic stf = new FragmentStatistic();
                 replaceFragment(stf);
-                setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
                 break;
         }
 
