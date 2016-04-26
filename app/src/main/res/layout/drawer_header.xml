@@ -26,7 +26,7 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:gravity="left"
-        android:paddingBottom="@dimen/padding_4"
+        android:paddingBottom="@dimen/margin_4"
         android:id="@+id/username"
         android:layout_above="@+id/email"
         android:layout_alignLeft="@+id/profile_image"
