@@ -1,5 +1,6 @@
 package com.example.agogolev.moneytracker;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState == null){
             replaceFragment(new FragmentExpenses());
         }
+
+
         Log.d(LOG_TAG, "***-*** onCreate");
     }
 
@@ -138,7 +144,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             String fragmentTag = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
             setTitelFragments(fragmentTag);
             setMenuActive(fragmentTag);
-        }
-
+        } 
     }
+    
+    public void showMessage(){
+        Toast.makeText(this, "I am fab!", Toast.LENGTH_SHORT).show();
+    }
+    
 }

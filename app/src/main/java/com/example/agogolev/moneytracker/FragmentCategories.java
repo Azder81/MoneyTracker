@@ -2,6 +2,7 @@ package com.example.agogolev.moneytracker;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,12 +19,20 @@ import java.util.List;
 public class FragmentCategories extends Fragment {
 
     private RecyclerView recyclerView;
+    private FloatingActionButton fab;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categories, container,false);
         initRecycleView(rootView);
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_categori);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return rootView;
     }
 
