@@ -2,7 +2,9 @@ package com.example.agogolev.moneytracker;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,12 +26,13 @@ public class FragmentCategories extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_categories, container,false);
+        final View rootView = inflater.inflate(R.layout.fragment_categories, container,false);
         initRecycleView(rootView);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_categori);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Snackbar.make(v, "Message Categori", Snackbar.LENGTH_SHORT).show();
 
             }
         });
@@ -51,4 +54,5 @@ public class FragmentCategories extends Fragment {
         cat.add(new Categories("For a car"));
         return cat;
     }
+
 }
