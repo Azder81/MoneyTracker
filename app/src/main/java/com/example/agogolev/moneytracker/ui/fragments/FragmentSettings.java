@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.agogolev.moneytracker.R;
 
-/**
- * Created by AGogolev on 22.04.2016.
- */
+
 public class FragmentSettings extends Fragment {
 
     @Nullable

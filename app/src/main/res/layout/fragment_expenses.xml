@@ -16,7 +16,7 @@
         </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
-            app:layout_behavior="com.example.agogolev.moneytracker.ScrollAwareFABBehavior"
+            app:layout_behavior="com.example.agogolev.moneytracker.utils.ScrollAwareFABBehavior"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fab_expens"

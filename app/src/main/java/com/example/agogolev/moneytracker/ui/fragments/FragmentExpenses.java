@@ -1,6 +1,7 @@
 package com.example.agogolev.moneytracker.ui.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,13 +16,13 @@ import android.view.ViewGroup;
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
 import com.example.agogolev.moneytracker.models.Expense;
+import com.example.agogolev.moneytracker.ui.DetailActivity;
+import com.example.agogolev.moneytracker.utils.ScrollAwareFABBehavior;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by AGogolev on 21.04.2016.
- */
+
 public class FragmentExpenses extends Fragment{
 
 
@@ -33,14 +34,20 @@ public class FragmentExpenses extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_expenses,container, false);
         initRecycleView(rootView);
-        fab_e = (FloatingActionButton) rootView.findViewById(R.id.fab_expens);
+        initFab(rootView);
+        return rootView;
+    }
+
+    private void initFab(View view){
+        fab_e = (FloatingActionButton) view.findViewById(R.id.fab_expens);
         fab_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Message Expenses", Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), DetailActivity.class);
+                startActivity(intent);
             }
         });
-        return rootView;
+
     }
 
     private void initRecycleView(View rootView){
