@@ -62,17 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(getString(R.string.app_name));
     }
 
-    private void setTitelFragments(String fragment_name){
-        if (fragment_name.contains("FragmentExpenses")){
-            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_expenses));
-        }else if (fragment_name.contains("FragmentCategories")){
-            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_categories));
-        }else if (fragment_name.contains("FragmentSettings")){
-            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_settings));
-        }else if (fragment_name.contains("FragmentStatistic")){
-            setTitle(getString(R.string.app_name)+" :"+getString(R.string.fragm_statistic));
-        }
-    }
 
     private void setMenuActive(String fragment_name){
         int nItem=R.id.drawer_expenses;
@@ -99,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.replace(R.id.main_container, fragment, backStackName);
             ft.addToBackStack(backStackName);
             ft.commit();
-            setTitelFragments(backStackName);
+
         }
     }
 
@@ -142,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else{
             super.onBackPressed();
             String fragmentTag = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
-            setTitelFragments(fragmentTag);
             setMenuActive(fragmentTag);
         } 
     }
