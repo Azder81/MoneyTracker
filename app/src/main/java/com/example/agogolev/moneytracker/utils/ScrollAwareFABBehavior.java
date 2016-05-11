@@ -1,4 +1,4 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.utils;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

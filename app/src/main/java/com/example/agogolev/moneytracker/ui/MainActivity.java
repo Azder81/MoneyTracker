@@ -1,6 +1,5 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.ui;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +13,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
+
+import com.example.agogolev.moneytracker.ui.fragments.FragmentCategories;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentExpenses;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentSettings;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentStatistic;
+import com.example.agogolev.moneytracker.R;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

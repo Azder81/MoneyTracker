@@ -1,19 +1,20 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.ui.fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.agogolev.moneytracker.R;
+import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
+import com.example.agogolev.moneytracker.models.Expense;
 
 import java.util.ArrayList;
 import java.util.List;

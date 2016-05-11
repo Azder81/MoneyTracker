@@ -1,10 +1,13 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.agogolev.moneytracker.models.Expense;
+import com.example.agogolev.moneytracker.R;
 
 import java.util.List;
 
