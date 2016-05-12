@@ -23,6 +23,4 @@ public class DetailActivity extends AppCompatActivity {
     @ViewById(R.id.date_expense)
     EditText editDate;
 
-
-
 }

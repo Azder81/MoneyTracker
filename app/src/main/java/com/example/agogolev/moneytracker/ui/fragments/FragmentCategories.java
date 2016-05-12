@@ -29,7 +29,7 @@ public class FragmentCategories extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_categories, container,false);
+        final View rootView = inflater.inflate(R.layout.fragment_categories, container, false);
         initRecycleView(rootView);
         fab = (FloatingActionButton) rootView.findViewById(R.id.fab_categori);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,14 +42,14 @@ public class FragmentCategories extends Fragment {
         return rootView;
     }
 
-    private void initRecycleView(View rootView){
+    private void initRecycleView(View rootView) {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.list_of_categori);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getCategori());
         recyclerView.setAdapter(categoriesAdapter);
     }
 
-    private List<Categories> getCategori(){
+    private List<Categories> getCategori() {
         List<Categories> cat = new ArrayList<>();
         cat.add(new Categories("Food"));
         cat.add(new Categories("clothes"));

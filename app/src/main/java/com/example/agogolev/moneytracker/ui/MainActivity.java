@@ -31,19 +31,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setActionBar();
         setupDrawerLayout();
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             replaceFragment(new FragmentExpenses());
         }
-
-
-        Log.d(LOG_TAG, "***-*** onCreate");
     }
 
     private void setActionBar() {
@@ -66,33 +62,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(getString(R.string.app_name));
     }
 
-
-    private void setMenuActive(String fragment_name){
-        int nItem=R.id.drawer_expenses;
-        if (fragment_name.contains("FragmentExpenses")){
-            nItem=R.id.drawer_expenses;
-        }else if (fragment_name.contains("FragmentCategories")){
-            nItem=R.id.drawer_categories;
-        }else if (fragment_name.contains("FragmentSettings")){
-            nItem=R.id.drawer_settings;
-        }else if (fragment_name.contains("FragmentStatistic")){
-            nItem=R.id.drawer_statistics;
+    private void setMenuActive(String fragment_name) {
+        int nItem = R.id.drawer_expenses;
+        if (fragment_name.contains("FragmentExpenses")) {
+            nItem = R.id.drawer_expenses;
+        } else if (fragment_name.contains("FragmentCategories")) {
+            nItem = R.id.drawer_categories;
+        } else if (fragment_name.contains("FragmentSettings")) {
+            nItem = R.id.drawer_settings;
+        } else if (fragment_name.contains("FragmentStatistic")) {
+            nItem = R.id.drawer_statistics;
         }
         navigationView.setCheckedItem(nItem);
     }
 
-    private void replaceFragment(Fragment fragment){
-
+    private void replaceFragment(Fragment fragment) {
         String backStackName = fragment.getClass().getName();
         FragmentManager manager = getSupportFragmentManager();
-        boolean fragmentPopped = manager.popBackStackImmediate(backStackName,0);
+        boolean fragmentPopped = manager.popBackStackImmediate(backStackName, 0);
 
-        if (!fragmentPopped && manager.findFragmentByTag(backStackName) == null){
+        if (!fragmentPopped && manager.findFragmentByTag(backStackName) == null) {
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.main_container, fragment, backStackName);
             ft.addToBackStack(backStackName);
             ft.commit();
-
         }
     }
 
@@ -102,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawerLayout != null) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.drawer_expenses:
                 FragmentExpenses ef = new FragmentExpenses();
                 replaceFragment(ef);
@@ -120,27 +113,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(stf);
                 break;
         }
-
         return true;
     }
 
     @Override
     public void onBackPressed() {
         FragmentManager manager = getSupportFragmentManager();
-
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else if (manager.getBackStackEntryCount() == 1) {
             supportFinishAfterTransition();
-        } else{
+        } else {
             super.onBackPressed();
             String fragmentTag = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
             setMenuActive(fragmentTag);
-        } 
+        }
     }
-    
-    public void showMessage(){
-        Toast.makeText(this, "I am fab!", Toast.LENGTH_SHORT).show();
-    }
-    
+
 }

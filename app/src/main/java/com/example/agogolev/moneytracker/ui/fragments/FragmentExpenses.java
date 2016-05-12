@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentExpenses extends Fragment{
+public class FragmentExpenses extends Fragment {
 
 
     private RecyclerView recyclerView;
@@ -33,13 +33,13 @@ public class FragmentExpenses extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_expenses,container, false);
+        View rootView = inflater.inflate(R.layout.fragment_expenses, container, false);
         initRecycleView(rootView);
         initFab(rootView);
         return rootView;
     }
 
-    private void initFab(View view){
+    private void initFab(View view) {
         fab_e = (FloatingActionButton) view.findViewById(R.id.fab_expens);
         fab_e.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,17 +48,16 @@ public class FragmentExpenses extends Fragment{
                 startActivity(intent);
             }
         });
-
     }
 
-    private void initRecycleView(View rootView){
+    private void initRecycleView(View rootView) {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.list_of_expenses);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
         recyclerView.setAdapter(expencesAdapter);
     }
 
-    private List<Expense> getExpenses(){
+    private List<Expense> getExpenses() {
         List<Expense> expences = new ArrayList<>();
         expences.add(new Expense("Cinema", "120"));
         expences.add(new Expense("Cafe", "150"));
