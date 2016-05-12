@@ -15,8 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".ui.DetailActivity_"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".ui.MainActivity">
 
         </activity>
     </application>

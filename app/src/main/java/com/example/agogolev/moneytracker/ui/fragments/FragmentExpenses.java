@@ -17,6 +17,7 @@ import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
 import com.example.agogolev.moneytracker.models.Expense;
 import com.example.agogolev.moneytracker.ui.DetailActivity;
+import com.example.agogolev.moneytracker.ui.DetailActivity_;
 import com.example.agogolev.moneytracker.utils.ScrollAwareFABBehavior;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class FragmentExpenses extends Fragment{
         fab_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DetailActivity.class);
+                Intent intent = new Intent(getContext(), DetailActivity_.class);
                 startActivity(intent);
             }
         });
