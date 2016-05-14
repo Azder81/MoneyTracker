@@ -36,11 +36,13 @@
         android:text="@string/date_exp"
         android:textSize="@dimen/text_size_14" />
 
-    <EditText
+    <TextView
         android:id="@+id/date_expense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date" />
+        android:clickable="true"
+        android:onClick="onClickDate"
+        android:textSize="@dimen/text_size_22" />
 
 
 </LinearLayout>
