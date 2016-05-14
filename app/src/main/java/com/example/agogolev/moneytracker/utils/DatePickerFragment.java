@@ -13,9 +13,6 @@ import com.example.agogolev.moneytracker.R;
 
 import java.util.Calendar;
 
-/**
- * Created by AGogolev on 14.05.2016.
- */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -32,7 +29,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        Calendar cal = Calendar.getInstance();
         TextView eT = (TextView) getActivity().findViewById(R.id.date_expense);
         eT.setText(new StringBuilder()
                 .append(dayOfMonth).append(".")

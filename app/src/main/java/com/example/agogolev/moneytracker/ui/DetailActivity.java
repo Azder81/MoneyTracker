@@ -1,6 +1,7 @@
 package com.example.agogolev.moneytracker.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.utils.DatePickerFragment;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -68,6 +70,11 @@ public class DetailActivity extends AppCompatActivity {
         );
     }
 
+    @Click(R.id.button)
+    public void onAdd(View view) {
+        Snackbar.make(view, "Добавили", Snackbar.LENGTH_SHORT).show();
+        this.finish();
+    }
     public void onClickDate(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");

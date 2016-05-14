@@ -9,50 +9,61 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.agogolev.moneytracker.ui.fragments.FragmentCategories;
-import com.example.agogolev.moneytracker.ui.fragments.FragmentExpenses;
-import com.example.agogolev.moneytracker.ui.fragments.FragmentSettings;
-import com.example.agogolev.moneytracker.ui.fragments.FragmentStatistic;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentCategories_;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentExpenses_;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentSettings_;
 import com.example.agogolev.moneytracker.R;
+import com.example.agogolev.moneytracker.ui.fragments.FragmentStatistic_;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private Toolbar toolbar;
+    @ViewById
+    Toolbar toolbar;
+    @ViewById(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+    @ViewById(R.id.navigation_view)
+    NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setActionBar();
-        setupDrawerLayout();
-        if (savedInstanceState == null) {
-            replaceFragment(new FragmentExpenses());
-        }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+////        setContentView(R.layout.activity_main);
+////        setActionBar();
+////        setupDrawerLayout();
+//        if (savedInstanceState == null) {
+//            replaceFragment(new FragmentExpenses());
+//        }
+//    }
+
+    @AfterViews
+    void setInitFragment() {
+        replaceFragment(new FragmentExpenses_());
     }
 
-    private void setActionBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+    @AfterViews
+    void setActionBar() {
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setupDrawerLayout() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+    @AfterViews
+    void setupDrawerLayout() {
+//        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -64,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void setMenuActive(String fragment_name) {
         int nItem = R.id.drawer_expenses;
-        if (fragment_name.contains("FragmentExpenses")) {
+        if (fragment_name.contains("FragmentExpenses_")) {
             nItem = R.id.drawer_expenses;
-        } else if (fragment_name.contains("FragmentCategories")) {
+        } else if (fragment_name.contains("FragmentCategories_")) {
             nItem = R.id.drawer_categories;
         } else if (fragment_name.contains("FragmentSettings")) {
             nItem = R.id.drawer_settings;
@@ -97,19 +108,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         switch (item.getItemId()) {
             case R.id.drawer_expenses:
-                FragmentExpenses ef = new FragmentExpenses();
+                FragmentExpenses_ ef = new FragmentExpenses_();
                 replaceFragment(ef);
                 break;
             case R.id.drawer_categories:
-                FragmentCategories cf = new FragmentCategories();
+                FragmentCategories_ cf = new FragmentCategories_();
                 replaceFragment(cf);
                 break;
             case R.id.drawer_settings:
-                FragmentSettings sf = new FragmentSettings();
+                FragmentSettings_ sf = new FragmentSettings_();
                 replaceFragment(sf);
                 break;
             case R.id.drawer_statistics:
-                FragmentStatistic stf = new FragmentStatistic();
+                FragmentStatistic_ stf = new FragmentStatistic_();
                 replaceFragment(stf);
                 break;
         }

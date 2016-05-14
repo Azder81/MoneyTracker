@@ -11,9 +11,7 @@ import com.example.agogolev.moneytracker.R;
 
 import java.util.List;
 
-/**
- * Created by AGogolev on 22.04.2016.
- */
+
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesHolden> {
 
     private List<Categories> categoriesList;

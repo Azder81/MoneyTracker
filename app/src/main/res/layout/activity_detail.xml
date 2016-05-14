@@ -1,48 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:theme="@style/AppCompat">
 
-    <EditText
-        android:id="@+id/sum"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/sum"
-        android:inputType="number"
-        android:textSize="@dimen/text_size_22" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/note"
-        android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/sum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sum"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_22" />
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/note_for_expens"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_22" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/date_exp"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:id="@+id/date_expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onClickDate"
+            android:textSize="@dimen/text_size_22" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/note_for_expens"
-        android:inputType="text"
-        android:textSize="@dimen/text_size_22" />
+        android:text="@string/button1"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:spinnerMode="dropdown" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/date_exp"
-        android:textSize="@dimen/text_size_14" />
-
-    <TextView
-        android:id="@+id/date_expense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="onClickDate"
-        android:textSize="@dimen/text_size_22" />
-
-
-</LinearLayout>
+</RelativeLayout>
