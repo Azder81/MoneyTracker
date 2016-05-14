@@ -34,18 +34,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
 
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-////        setContentView(R.layout.activity_main);
-////        setActionBar();
-////        setupDrawerLayout();
-//        if (savedInstanceState == null) {
-//            replaceFragment(new FragmentExpenses());
-//        }
-//    }
-
     @AfterViews
     void setInitFragment() {
         replaceFragment(new FragmentExpenses_());
@@ -53,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @AfterViews
     void setActionBar() {
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null)
@@ -62,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @AfterViews
     void setupDrawerLayout() {
-//        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -99,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.commit();
         }
     }
-
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
