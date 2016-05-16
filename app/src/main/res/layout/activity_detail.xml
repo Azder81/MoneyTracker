@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sum"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textSize="@dimen/text_size_22" />
 
         <EditText
@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/note_for_expens"
             android:inputType="text"
-            android:textSize="@dimen/text_size_22" />
+            android:textSize="@dimen/text_size_22"
+            android:maxLength="100" />
 
         <Spinner
             android:id="@+id/spinner"
