@@ -25,7 +25,7 @@ import java.util.Calendar;
 @EActivity(R.layout.activity_detail)
 public class DetailActivity extends AppCompatActivity {
 
-    public int dd, mm, yy;
+    private String categori;
 
     @ViewById
     EditText sum;
@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                categori = data[position];
             }
 
             @Override
@@ -60,21 +60,23 @@ public class DetailActivity extends AppCompatActivity {
     @AfterViews
     public void createDateText() {
         Calendar cal = Calendar.getInstance();
-        yy = cal.get(Calendar.YEAR);
-        mm = cal.get(Calendar.MONTH);
-        dd = cal.get(Calendar.DAY_OF_MONTH);
+        String yy = Integer.toString(cal.get(Calendar.YEAR));
+        String mm = cal.get(Calendar.MONTH) < 10 ? "0" + Integer.toString(cal.get(Calendar.MONTH) + 1) : Integer.toString(cal.get(Calendar.MONTH) + 1);
+        ;
+        String dd = cal.get(Calendar.DAY_OF_MONTH) < 10 ? "0" + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)) : Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
         editDate.setText(new StringBuilder()
                 .append(dd).append(".")
-                .append(mm + 1).append(".")
+                .append(mm).append(".")
                 .append(yy)
         );
     }
 
     @Click(R.id.button)
     public void onAdd(View view) {
-        Snackbar.make(view, "Добавили", Snackbar.LENGTH_SHORT).show();
-        this.finish();
+        Snackbar.make(view, "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
+//        this.finish();
     }
+
     public void onClickDate(View view) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");

@@ -29,10 +29,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        String dd = dayOfMonth < 10 ? "0" + Integer.toString(dayOfMonth) : Integer.toString(dayOfMonth);
+        String mm = monthOfYear < 10 ? "0" + Integer.toString(monthOfYear + 1) : Integer.toString(monthOfYear + 1);
         TextView eT = (TextView) getActivity().findViewById(R.id.date_expense);
         eT.setText(new StringBuilder()
-                .append(dayOfMonth).append(".")
-                .append(monthOfYear + 1).append(".")
+                .append(dd).append(".")
+                .append(mm).append(".")
                 .append(year)
         );
 
