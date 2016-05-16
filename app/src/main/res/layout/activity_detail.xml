@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppCompat">
 
     <LinearLayout
@@ -9,22 +10,38 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/sum"
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sum"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/text_size_22" />
+            app:mtf_image="@mipmap/ic_monetization_on_black_24dp"
+            app:mtf_labelColor="@color/colorGrey">
 
-        <EditText
-            android:id="@+id/note"
+            <EditText
+                android:id="@+id/sum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sum"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/text_size_22" />
+
+        </com.github.florent37.materialtextfield.MaterialTextField>
+
+
+        <com.github.florent37.materialtextfield.MaterialTextField
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/note_for_expens"
-            android:inputType="text"
-            android:textSize="@dimen/text_size_22"
-            android:maxLength="100" />
+            app:mtf_image="@mipmap/ic_insert_comment_black_24dp"
+            app:mtf_labelColor="@color/colorGrey">
+
+            <EditText
+                android:id="@+id/note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/note_for_expens"
+                android:inputType="text"
+                android:textSize="@dimen/text_size_22"
+                android:maxLength="100" />
+        </com.github.florent37.materialtextfield.MaterialTextField>
 
         <Spinner
             android:id="@+id/spinner"
