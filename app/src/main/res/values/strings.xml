@@ -13,4 +13,11 @@
     <string name="fragm_categories">Категории</string>
     <string name="fragm_statistic">Статистика</string>
     <string name="fragm_settings">Настройки</string>
+
+    <!-- For activity_detail -->
+    <string name="add_expense_titel">"Добавить трату"</string>
+    <string name="sum">"Сумма"</string>
+    <string name="note_for_expens">"Примечание"</string>
+    <string name="date_exp">"Дата"</string>
+    <string name="button1">"Добавить"</string>
 </resources>

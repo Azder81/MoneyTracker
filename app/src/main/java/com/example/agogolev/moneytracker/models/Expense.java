@@ -1,4 +1,4 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.models;
 
 /**
  * Created by AGogolev on 21.04.2016.

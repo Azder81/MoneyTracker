@@ -7,13 +7,29 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".ui.SplashActivity_"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity_"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+        <activity android:name=".ui.DetailActivity_"
+            android:theme="@style/AppCompat"
+            android:parentActivityName=".ui.MainActivity_">
+
         </activity>
     </application>
 

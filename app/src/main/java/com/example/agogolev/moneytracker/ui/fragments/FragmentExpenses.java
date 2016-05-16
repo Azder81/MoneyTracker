@@ -1,55 +1,54 @@
-package com.example.agogolev.moneytracker;
+package com.example.agogolev.moneytracker.ui.fragments;
 
 
-import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+import com.example.agogolev.moneytracker.R;
+import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
+import com.example.agogolev.moneytracker.models.Expense;
+import com.example.agogolev.moneytracker.ui.DetailActivity_;
+
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by AGogolev on 21.04.2016.
- */
-public class FragmentExpenses extends Fragment{
+@EFragment(R.layout.fragment_expenses)
+public class FragmentExpenses extends Fragment {
 
 
-    private RecyclerView recyclerView;
-    private FloatingActionButton fab_e;
+    @ViewById(R.id.list_of_expenses)
+    RecyclerView recyclerView;
+    @ViewById(R.id.fab_expens)
+    FloatingActionButton fab_e;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_expenses,container, false);
-        initRecycleView(rootView);
-        fab_e = (FloatingActionButton) rootView.findViewById(R.id.fab_expens);
+    @AfterViews
+    public void initFab() {
         fab_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Message Categori", Snackbar.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), DetailActivity_.class);
+                startActivity(intent);
             }
         });
-        return rootView;
     }
 
-    private void initRecycleView(View rootView){
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.list_of_expenses);
+    @AfterViews
+    public void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
         recyclerView.setAdapter(expencesAdapter);
     }
 
-    private List<Expense> getExpenses(){
+    private List<Expense> getExpenses() {
         List<Expense> expences = new ArrayList<>();
         expences.add(new Expense("Cinema", "120"));
         expences.add(new Expense("Cafe", "150"));

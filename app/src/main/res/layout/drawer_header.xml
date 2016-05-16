@@ -8,40 +8,40 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
+        android:id="@+id/profile_image"
         android:layout_width="@dimen/drawer_header_layout_image"
         android:layout_height="@dimen/drawer_header_layout_image"
-        android:id="@+id/profile_image"
-        android:src="@mipmap/ava_circle"
-        android:layout_marginLeft="@dimen/margin_24"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="@dimen/margin_24"/>
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_24"
+        android:layout_marginStart="@dimen/margin_24"
+        android:src="@mipmap/ava_circle" />
 
     <TextView
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_name"
-        android:textSize="@dimen/drawer_header_text_size"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:gravity="left"
-        android:paddingBottom="@dimen/margin_4"
-        android:id="@+id/username"
         android:layout_above="@+id/email"
         android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_alignStart="@+id/profile_image"
+        android:gravity="left"
+        android:paddingBottom="@dimen/margin_4"
+        android:text="@string/user_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/drawer_header_text_size"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/user_email"
-        android:id="@+id/email"
-        android:gravity="left"
-        android:layout_marginBottom="@dimen/margin_8"
-        android:textSize="@dimen/drawer_header_text_size"
-        android:textColor="@color/colorWhite"
-        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/username"
-        android:layout_alignStart="@+id/username" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/username"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:gravity="left"
+        android:text="@string/user_email"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/drawer_header_text_size" />
 </RelativeLayout>
