@@ -30,4 +30,9 @@ dependencies {
     apt "org.androidannotations:androidannotations:4.0.0"
     compile "org.androidannotations:androidannotations-api:4.0.0"
     compile 'com.github.florent37:materialtextfield:1.0.4'
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:3.0.0-beta6"
+    // use kapt for kotlin apt
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:3.0.0-beta6"
+    compile "com.github.Raizlabs.DBFlow:dbflow:3.0.0-beta6"
 }
