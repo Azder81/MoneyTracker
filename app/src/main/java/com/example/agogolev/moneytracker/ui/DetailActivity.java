@@ -4,9 +4,6 @@ package com.example.agogolev.moneytracker.ui;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Loader;
-//import android.support.v4.app.LoaderManager;
-//import android.support.v4.content.Loader;
-//import android.support.v4.content.AsyncTaskLoader;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -37,6 +34,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private String categori;
     private Map<String, String> hm;
+    private String[] dataSpiner;
+
     private static final int ID_LOADER = 3;
 
     @ViewById
@@ -48,19 +47,17 @@ public class DetailActivity extends AppCompatActivity {
     @ViewById(R.id.date_expense)
     TextView editDate;
 
-    String[] data = {"Food", "clothes", "communication", "For a car"};
 
-    @AfterViews
     public void createSpiner() {
-        loadCategories();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, data);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, dataSpiner);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setPrompt("Категории");
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categori = data[position];
+                categori = dataSpiner[position];
             }
 
             @Override
@@ -75,7 +72,6 @@ public class DetailActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String yy = Integer.toString(cal.get(Calendar.YEAR));
         String mm = cal.get(Calendar.MONTH) < 10 ? "0" + Integer.toString(cal.get(Calendar.MONTH) + 1) : Integer.toString(cal.get(Calendar.MONTH) + 1);
-        ;
         String dd = cal.get(Calendar.DAY_OF_MONTH) < 10 ? "0" + Integer.toString(cal.get(Calendar.DAY_OF_MONTH)) : Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
         editDate.setText(new StringBuilder()
                 .append(dd).append(".")
@@ -87,7 +83,13 @@ public class DetailActivity extends AppCompatActivity {
     @Click(R.id.button)
     public void onAdd(View view) {
         Snackbar.make(view, "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
-//        this.finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadCategories();
+        //createSpiner();
     }
 
     private void loadCategories() {
@@ -108,19 +110,23 @@ public class DetailActivity extends AppCompatActivity {
 
             @Override
             public void onLoadFinished(android.content.Loader<List<CategoriesTable>> loader, List<CategoriesTable> data) {
+                //для того что бы получить потом обратно id категории, положим все в HashMap
+                //с ключен name и значениями id, тогда можно найти id по значению :)
                 hm = new HashMap<String, String>();
-                for (CategoriesTable ct : data) {
-                    hm.put(Long.toString(ct.getId()), ct.getName());
+                dataSpiner = new String[data.size()];
+                for (int i = 0; i < data.size(); i++) {
+                    hm.put(data.get(i).getName(), Long.toString(data.get(i).getId()));
+                    dataSpiner[i] = data.get(i).getName();
                 }
+
+                createSpiner();
             }
 
             @Override
             public void onLoaderReset(android.content.Loader<List<CategoriesTable>> loader) {
 
             }
-
         });
-
     }
 
     public void onClickDate(View view) {
