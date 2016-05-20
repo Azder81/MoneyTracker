@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.models.Categories;
 import com.example.agogolev.moneytracker.R;
 
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesHolden> {
 
-    private List<Categories> categoriesList;
+    private List<CategoriesTable> categoriesList;
 
-    public CategoriesAdapter(List<Categories> categoriesList){
+    public CategoriesAdapter(List<CategoriesTable> categoriesList) {
         this.categoriesList = categoriesList;
     }
 
@@ -28,8 +29,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public void onBindViewHolder(CategoriesHolden holder, int position) {
-        Categories categories = categoriesList.get(position);
-        holder.categories_name.setText(categories.categories_name);
+        CategoriesTable categories = categoriesList.get(position);
+        holder.categories_name.setText(categories.getName());
     }
 
     @Override

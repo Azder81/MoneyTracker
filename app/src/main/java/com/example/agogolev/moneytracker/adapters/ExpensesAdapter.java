@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.models.Expense;
 import com.example.agogolev.moneytracker.R;
 
@@ -16,9 +17,9 @@ import java.util.List;
  */
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ExpencesHolder> {
 
-    private List<Expense> expenseList;
+    private List<ExpensesTable> expenseList;
 
-    public ExpensesAdapter(List<Expense> expenceList){
+    public ExpensesAdapter(List<ExpensesTable> expenceList) {
         this.expenseList = expenceList;
     }
 
@@ -30,9 +31,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.Expenc
 
     @Override
     public void onBindViewHolder(ExpensesAdapter.ExpencesHolder holder, int position) {
-        Expense expence = expenseList.get(position);
-        holder.description.setText(expence.description);
-        holder.price.setText(expence.price);
+        ExpensesTable expence = expenseList.get(position);
+        holder.description.setText(expence.getDescription());
+        holder.price.setText(expence.getPrice());
     }
 
     @Override

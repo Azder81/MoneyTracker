@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
+import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.models.Expense;
 import com.example.agogolev.moneytracker.ui.DetailActivity_;
 
@@ -44,21 +45,24 @@ public class FragmentExpenses extends Fragment {
     @AfterViews
     public void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
-        recyclerView.setAdapter(expencesAdapter);
+//        ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
+//        recyclerView.setAdapter(expencesAdapter);
     }
 
-    private List<Expense> getExpenses() {
-        List<Expense> expences = new ArrayList<>();
-        expences.add(new Expense("Cinema", "120"));
-        expences.add(new Expense("Cafe", "150"));
-        expences.add(new Expense("Car", "1200000"));
-        expences.add(new Expense("cake", "15"));
-        expences.add(new Expense("egg", "56"));
-        expences.add(new Expense("Tea", "65"));
-        expences.add(new Expense("Coffee Pele", "135"));
-        expences.add(new Expense("bread", "21"));
-        return expences;
+    @AfterViews
+    public void addExpenses() {
+        if (ExpensesTable.getAllExpenses().isEmpty()) {
+            insertExpenses();
+        }
+    }
+
+    public void insertExpenses() {
+        ExpensesTable expensesTable = new ExpensesTable();
+        expensesTable.setPrice("100");
+        expensesTable.setDat("01.01.2016");
+        expensesTable.setDescription("минералка");
+        expensesTable.save();
+
     }
 
 }
