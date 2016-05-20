@@ -45,4 +45,10 @@ public class CategoriesTable extends BaseModel {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static List<CategoriesTable> getAllCategories() {
+        return SQLite.select()
+                .from(CategoriesTable.class)
+                .queryList();
+    }
 }

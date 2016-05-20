@@ -50,8 +50,6 @@ public class FragmentExpenses extends Fragment {
     @AfterViews
     public void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        ExpensesAdapter expencesAdapter = new ExpensesAdapter(getExpenses());
-//        recyclerView.setAdapter(expencesAdapter);
     }
 
     @AfterViews

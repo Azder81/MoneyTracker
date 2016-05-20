@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.CategoriesAdapter;
+import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.models.Categories;
 
 import org.androidannotations.annotations.AfterViews;
@@ -49,13 +50,20 @@ public class FragmentCategories extends Fragment {
 //        recyclerView.setAdapter(categoriesAdapter);
     }
 
-    private List<Categories> getCategori() {
-        List<Categories> cat = new ArrayList<>();
-        cat.add(new Categories("Food"));
-        cat.add(new Categories("clothes"));
-        cat.add(new Categories("communication"));
-        cat.add(new Categories("For a car"));
-        return cat;
+    @AfterViews
+    void insertCategori() {
+        if (CategoriesTable.getAllCategories().isEmpty()) {
+            List<String> cat = new ArrayList<>();
+            cat.add("Food");
+            cat.add("clothes");
+            cat.add("communication");
+            cat.add("For a car");
+            for (String it : cat) {
+                CategoriesTable categoriesTable = new CategoriesTable();
+                categoriesTable.setName(it);
+                categoriesTable.save();
+            }
+        }
     }
 
 }
