@@ -51,4 +51,11 @@ public class CategoriesTable extends BaseModel {
                 .from(CategoriesTable.class)
                 .queryList();
     }
+
+    public static CategoriesTable getById(long idM) {
+        return SQLite.select()
+                .from(CategoriesTable.class)
+                .where(CategoriesTable_Table.id.eq(idM))
+                .querySingle();
+    }
 }

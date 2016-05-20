@@ -30,10 +30,10 @@ public class ExpensesTable extends BaseModel {
     @ForeignKey
     ForeignKeyContainer<CategoriesTable> categoriesTable;
 
-    public void associateCtegori(CategoriesTable categoriesTable) {
+    public void associateCategori(CategoriesTable catTable) {
 
         this.categoriesTable = FlowManager.getContainerAdapter(CategoriesTable.class)
-                .toForeignKeyContainer(categoriesTable);
+                .toForeignKeyContainer(catTable);
     }
 
     public long getId() {

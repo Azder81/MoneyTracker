@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
+import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.utils.DatePickerFragment;
+import com.raizlabs.android.dbflow.structure.container.ModelContainerAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -32,9 +34,9 @@ import java.util.Map;
 @EActivity(R.layout.activity_detail)
 public class DetailActivity extends AppCompatActivity {
 
-    private String categori;
     private Map<String, String> hm;
     private String[] dataSpiner;
+    private long idM;
 
     private static final int ID_LOADER = 3;
 
@@ -57,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categori = dataSpiner[position];
+                idM = Long.parseLong(hm.get(dataSpiner[position]));
             }
 
             @Override
@@ -82,14 +84,22 @@ public class DetailActivity extends AppCompatActivity {
 
     @Click(R.id.button)
     public void onAdd(View view) {
-        Snackbar.make(view, "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
+        ExpensesTable expensesTable = new ExpensesTable();
+        expensesTable.setPrice(sum.getText().toString());
+        expensesTable.setDescription(note.getText().toString());
+        expensesTable.setDat(editDate.getText().toString());
+
+        CategoriesTable categoriesTable = CategoriesTable.getById(idM);
+        expensesTable.associateCategori(categoriesTable);
+        expensesTable.save();
+        finish();
+//        Snackbar.make(view, "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         loadCategories();
-        //createSpiner();
     }
 
     private void loadCategories() {
@@ -111,7 +121,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onLoadFinished(android.content.Loader<List<CategoriesTable>> loader, List<CategoriesTable> data) {
                 //для того что бы получить потом обратно id категории, положим все в HashMap
-                //с ключен name и значениями id, тогда можно найти id по значению :)
+                //с ключен name и значениями id, тогда можно найти id по name :)
                 hm = new HashMap<String, String>();
                 dataSpiner = new String[data.size()];
                 for (int i = 0; i < data.size(); i++) {
