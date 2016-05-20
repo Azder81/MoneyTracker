@@ -45,8 +45,8 @@ public class FragmentCategories extends Fragment {
     @AfterViews
     public void initRecycleView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getCategori());
-        recyclerView.setAdapter(categoriesAdapter);
+//        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getCategori());
+//        recyclerView.setAdapter(categoriesAdapter);
     }
 
     private List<Categories> getCategori() {
