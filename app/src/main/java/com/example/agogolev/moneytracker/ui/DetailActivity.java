@@ -19,7 +19,6 @@ import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.utils.DatePickerFragment;
-import com.raizlabs.android.dbflow.structure.container.ModelContainerAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;

@@ -3,15 +3,18 @@ package com.example.agogolev.moneytracker.database.dbmodels;
 import com.example.agogolev.moneytracker.database.MoneyTrackerDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.raizlabs.android.dbflow.structure.container.ForeignKeyContainer;
 
 import java.util.List;
 
+@ModelContainer
 @Table(database = MoneyTrackerDatabase.class)
 public class ExpensesTable extends BaseModel {
 
@@ -40,6 +43,10 @@ public class ExpensesTable extends BaseModel {
         return id;
     }
 
+//    public void setCategoriesTable(ForeignKeyContainer<CategoriesTable> categoriesTable) {
+//        this.categoriesTable = categoriesTable;
+//    }
+
     public String getDat() {
         return dat;
     }
@@ -63,6 +70,13 @@ public class ExpensesTable extends BaseModel {
     public void setDat(String dat) {
         this.dat = dat;
     }
+
+    @Override
+    public ModelAdapter getModelAdapter() {
+        return super.getModelAdapter();
+    }
+
+
 
     public static List<ExpensesTable> getAllExpenses() {
         return SQLite.select()
