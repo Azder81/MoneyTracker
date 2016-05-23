@@ -2,7 +2,6 @@ package com.example.agogolev.moneytracker;
 
 import android.app.Application;
 
-import com.example.agogolev.moneytracker.ui.fragments.FragmentCategories_;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 

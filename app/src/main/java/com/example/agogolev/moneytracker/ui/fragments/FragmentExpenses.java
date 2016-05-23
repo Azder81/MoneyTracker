@@ -1,6 +1,5 @@
 package com.example.agogolev.moneytracker.ui.fragments;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,7 +15,6 @@ import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
 import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
-import com.example.agogolev.moneytracker.models.Expense;
 import com.example.agogolev.moneytracker.ui.DetailActivity_;
 
 

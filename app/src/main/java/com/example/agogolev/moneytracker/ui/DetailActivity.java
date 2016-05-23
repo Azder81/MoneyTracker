@@ -5,7 +5,6 @@ import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
 import android.content.Loader;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,9 +15,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.agogolev.moneytracker.R;
+import com.example.agogolev.moneytracker.database.MoneyTrackerDatabase;
 import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.utils.DatePickerFragment;
+import com.raizlabs.android.dbflow.config.DatabaseDefinition;
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -90,15 +94,41 @@ public class DetailActivity extends AppCompatActivity {
     @Click(R.id.button)
     public void onAdd(View view) {
         ExpensesTable expensesTable = new ExpensesTable();
-        expensesTable.setPrice(sum.getText().toString());
-        expensesTable.setDescription(note.getText().toString());
-        expensesTable.setDat(editDate.getText().toString());
 
-        idM = Long.parseLong(hm.get(spinner.getSelectedItem()));
-        CategoriesTable categoriesTable = CategoriesTable.getById(idM);
-        expensesTable.associateCategori(categoriesTable);
-        expensesTable.save();
-        finish();
+        DatabaseDefinition database = FlowManager.getDatabase(MoneyTrackerDatabase.class);
+        ProcessModelTransaction<ExpensesTable> processModelTransaction = new ProcessModelTransaction.Builder<>(new ProcessModelTransaction.ProcessModel<ExpensesTable>() {
+            @Override
+            public void processModel(ExpensesTable expensesTable) {
+                expensesTable.setPrice(sum.getText().toString());
+                expensesTable.setDescription(note.getText().toString());
+                expensesTable.setDat(editDate.getText().toString());
+
+                idM = Long.parseLong(hm.get(spinner.getSelectedItem()));
+                CategoriesTable categoriesTable = CategoriesTable.getById(idM);
+                expensesTable.associateCategori(categoriesTable);
+                expensesTable.save();
+            }
+        }).processListener(new ProcessModelTransaction.OnModelProcessListener<ExpensesTable>() {
+            @Override
+            public void onModelProcessed(long current, long total, ExpensesTable modifiedModel) {
+
+            }
+        }).add(expensesTable).build();
+
+        Transaction transaction = database.beginTransactionAsync(processModelTransaction)
+                .success(new Transaction.Success() {
+                    @Override
+                    public void onSuccess(Transaction transaction) {
+                        finish();
+                    }
+                }).error(new Transaction.Error() {
+                    @Override
+                    public void onError(Transaction transaction, Throwable error) {
+
+                    }
+                }).build();
+
+        transaction.execute();
 //        Snackbar.make(view, "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
     }
 
