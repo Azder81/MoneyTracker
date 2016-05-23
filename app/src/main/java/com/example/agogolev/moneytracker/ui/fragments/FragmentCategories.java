@@ -54,7 +54,7 @@ public class FragmentCategories extends Fragment {
     }
 
     @AfterViews
-    void insertCategori() {
+    public void insertCategori() {
         if (CategoriesTable.getAllCategories().isEmpty()) {
             List<String> cat = new ArrayList<>();
             cat.add("Food");

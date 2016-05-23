@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
+import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 import com.example.agogolev.moneytracker.database.dbmodels.ExpensesTable;
 import com.example.agogolev.moneytracker.models.Expense;
 import com.example.agogolev.moneytracker.ui.DetailActivity_;
@@ -57,6 +58,7 @@ public class FragmentExpenses extends Fragment {
         if (ExpensesTable.getAllExpenses().isEmpty()) {
             insertExpenses();
         }
+        insertCategori();
     }
 
     @Override
@@ -100,6 +102,22 @@ public class FragmentExpenses extends Fragment {
         expensesTable.setDescription("минералка");
         expensesTable.save();
 
+    }
+
+
+    public void insertCategori() {
+        if (CategoriesTable.getAllCategories().isEmpty()) {
+            List<String> cat = new ArrayList<>();
+            cat.add("Food");
+            cat.add("clothes");
+            cat.add("communication");
+            cat.add("For a car");
+            for (String it : cat) {
+                CategoriesTable categoriesTable = new CategoriesTable();
+                categoriesTable.setName(it);
+                categoriesTable.save();
+            }
+        }
     }
 
 }

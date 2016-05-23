@@ -25,6 +25,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +35,9 @@ import java.util.Map;
 public class DetailActivity extends AppCompatActivity {
 
     private Map<String, String> hm;
-    private String[] dataSpiner;
+    private ArrayList<String> dataSpiner = new ArrayList<String>();
     private long idM;
-
+    private ArrayAdapter<String> adapter;
     private static final int ID_LOADER = 3;
 
     @ViewById
@@ -48,17 +49,18 @@ public class DetailActivity extends AppCompatActivity {
     @ViewById(R.id.date_expense)
     TextView editDate;
 
-
+    @AfterViews
     public void createSpiner() {
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, dataSpiner);
+        adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, dataSpiner);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setPrompt("Категории");
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                idM = Long.parseLong(hm.get(dataSpiner[position]));
+                ((TextView) parent.getChildAt(0)).setTextSize(12);
+//                idM = Long.parseLong(hm.get(dataSpiner[position]));
             }
 
             @Override
@@ -66,6 +68,10 @@ public class DetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateSpiner() {
+        adapter.notifyDataSetChanged();
     }
 
     @AfterViews
@@ -88,6 +94,7 @@ public class DetailActivity extends AppCompatActivity {
         expensesTable.setDescription(note.getText().toString());
         expensesTable.setDat(editDate.getText().toString());
 
+        idM = Long.parseLong(hm.get(spinner.getSelectedItem()));
         CategoriesTable categoriesTable = CategoriesTable.getById(idM);
         expensesTable.associateCategori(categoriesTable);
         expensesTable.save();
@@ -122,13 +129,11 @@ public class DetailActivity extends AppCompatActivity {
                 //для того что бы получить потом обратно id категории, положим все в HashMap
                 //с ключен name и значениями id, тогда можно найти id по name :)
                 hm = new HashMap<String, String>();
-                dataSpiner = new String[data.size()];
                 for (int i = 0; i < data.size(); i++) {
                     hm.put(data.get(i).getName(), Long.toString(data.get(i).getId()));
-                    dataSpiner[i] = data.get(i).getName();
+                    dataSpiner.add(data.get(i).getName());
                 }
-
-                createSpiner();
+                updateSpiner();
             }
 
             @Override
