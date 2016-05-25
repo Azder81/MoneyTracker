@@ -140,7 +140,7 @@ public class FragmentExpenses extends Fragment {
 
 
     public void insertCategori() {
-        if (CategoriesTable.getAllCategories().isEmpty()) {
+        if (CategoriesTable.getAllCategories("").isEmpty()) {
             List<String> cat = new ArrayList<>();
             cat.add("Food");
             cat.add("clothes");

@@ -9,19 +9,27 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.CategoriesAdapter;
 import com.example.agogolev.moneytracker.database.dbmodels.CategoriesTable;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.api.BackgroundExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@OptionsMenu(R.menu.search_menu)
 @EFragment(R.layout.fragment_categories)
 public class FragmentCategories extends Fragment {
 
@@ -31,6 +39,9 @@ public class FragmentCategories extends Fragment {
     RecyclerView recyclerView;
     @ViewById(R.id.fab_categori)
     FloatingActionButton fab;
+    @OptionsMenuItem(R.id.search_action)
+    MenuItem menuItem;
+    private static final String FILTER_ID = "filter_id";
 
     @AfterViews
     public void initFab() {
@@ -50,7 +61,7 @@ public class FragmentCategories extends Fragment {
 
     @AfterViews
     public void insertCategori() {
-        if (CategoriesTable.getAllCategories().isEmpty()) {
+        if (CategoriesTable.getAllCategories("").isEmpty()) {
             List<String> cat = new ArrayList<>();
             cat.add("Food");
             cat.add("clothes");
@@ -67,10 +78,35 @@ public class FragmentCategories extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadCategories();
+        loadCategories("");
     }
 
-    private void loadCategories() {
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint(getString(R.string.search_titel));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                BackgroundExecutor.cancelAll(FILTER_ID, true);
+                queryExpenses(newText);
+                return false;
+            }
+        });
+    }
+
+    @Background(delay = 700, id = FILTER_ID)
+    public void queryExpenses(String filter) {
+        loadCategories(filter);
+    }
+
+    private void loadCategories(final String filter) {
 
         getLoaderManager().restartLoader(ID_LOADER, null, new LoaderManager.LoaderCallbacks<List<CategoriesTable>>() {
             @Override
@@ -78,7 +114,7 @@ public class FragmentCategories extends Fragment {
                 final AsyncTaskLoader<List<CategoriesTable>> loader = new AsyncTaskLoader<List<CategoriesTable>>(getActivity()) {
                     @Override
                     public List<CategoriesTable> loadInBackground() {
-                        return CategoriesTable.getAllCategories();
+                        return CategoriesTable.getAllCategories(filter);
                     }
                 };
                 loader.forceLoad();
