@@ -10,6 +10,7 @@
     <dimen name="drawer_header_text_size">14dp</dimen>
     <dimen name="text_size_22">22sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_40">40sp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_2">2dp</dimen>
