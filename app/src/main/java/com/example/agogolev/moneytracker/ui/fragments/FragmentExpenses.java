@@ -22,10 +22,12 @@ import com.example.agogolev.moneytracker.ui.DetailActivity_;
 
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.api.BackgroundExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class FragmentExpenses extends Fragment {
     FloatingActionButton fab_e;
     @OptionsMenuItem(R.id.search_action)
     MenuItem menuItem;
+    private static final String FILTER_ID = "filter_id";
 
     @AfterViews
     public void initFab() {
@@ -114,16 +117,23 @@ public class FragmentExpenses extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                BackgroundExecutor.cancelAll(FILTER_ID, true);
+                queryExpenses(newText);
                 return false;
             }
         });
+    }
+
+    @Background(delay = 700, id = FILTER_ID)
+    public void queryExpenses(String filter) {
+        loadExpenses(filter);
     }
 
     public void insertExpenses() {
         ExpensesTable expensesTable = new ExpensesTable();
         expensesTable.setPrice("100");
         expensesTable.setDat("01.01.2016");
-        expensesTable.setDescription("минералка");
+        expensesTable.setDescription("water");
         expensesTable.save();
 
     }
