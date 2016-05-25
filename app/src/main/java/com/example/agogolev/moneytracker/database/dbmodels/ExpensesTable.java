@@ -77,10 +77,10 @@ public class ExpensesTable extends BaseModel {
     }
 
 
-
-    public static List<ExpensesTable> getAllExpenses() {
+    public static List<ExpensesTable> getAllExpenses(String filter) {
         return SQLite.select()
                 .from(ExpensesTable.class)
+                .where(ExpensesTable_Table.description.like("%" + filter + "%"))
                 .queryList();
     }
 }
