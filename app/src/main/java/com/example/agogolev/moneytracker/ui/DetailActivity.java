@@ -146,7 +146,7 @@ public class DetailActivity extends AppCompatActivity {
                 final AsyncTaskLoader<List<CategoriesTable>> loader = new AsyncTaskLoader<List<CategoriesTable>>(DetailActivity.this) {
                     @Override
                     public List<CategoriesTable> loadInBackground() {
-                        return CategoriesTable.getAllCategories();
+                        return CategoriesTable.getAllCategories("");
                     }
 
                 };

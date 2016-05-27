@@ -9,7 +9,10 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.adapters.ExpensesAdapter;
@@ -19,12 +22,17 @@ import com.example.agogolev.moneytracker.ui.DetailActivity_;
 
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 import org.androidannotations.annotations.ViewById;
+import org.androidannotations.api.BackgroundExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@OptionsMenu(R.menu.search_menu)
 @EFragment(R.layout.fragment_expenses)
 public class FragmentExpenses extends Fragment {
 
@@ -34,6 +42,9 @@ public class FragmentExpenses extends Fragment {
     RecyclerView recyclerView;
     @ViewById(R.id.fab_expens)
     FloatingActionButton fab_e;
+    @OptionsMenuItem(R.id.search_action)
+    MenuItem menuItem;
+    private static final String FILTER_ID = "filter_id";
 
     @AfterViews
     public void initFab() {
@@ -53,7 +64,7 @@ public class FragmentExpenses extends Fragment {
 
     @AfterViews
     public void addExpenses() {
-        if (ExpensesTable.getAllExpenses().isEmpty()) {
+        if (ExpensesTable.getAllExpenses("").isEmpty()) {
             insertExpenses();
         }
         insertCategori();
@@ -62,10 +73,10 @@ public class FragmentExpenses extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadExpenses();
+        loadExpenses("");
     }
 
-    private void loadExpenses() {
+    private void loadExpenses(final String filter) {
 
         getLoaderManager().restartLoader(ID_LOADER, null, new LoaderManager.LoaderCallbacks<List<ExpensesTable>>() {
             @Override
@@ -73,7 +84,7 @@ public class FragmentExpenses extends Fragment {
                 final AsyncTaskLoader<List<ExpensesTable>> loader = new AsyncTaskLoader<List<ExpensesTable>>(getActivity()) {
                     @Override
                     public List<ExpensesTable> loadInBackground() {
-                        return ExpensesTable.getAllExpenses();
+                        return ExpensesTable.getAllExpenses(filter);
                     }
                 };
                 loader.forceLoad();
@@ -93,18 +104,43 @@ public class FragmentExpenses extends Fragment {
         });
     }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint(getString(R.string.search_titel));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                BackgroundExecutor.cancelAll(FILTER_ID, true);
+                queryExpenses(newText);
+                return false;
+            }
+        });
+    }
+
+    @Background(delay = 700, id = FILTER_ID)
+    public void queryExpenses(String filter) {
+        loadExpenses(filter);
+    }
+
     public void insertExpenses() {
         ExpensesTable expensesTable = new ExpensesTable();
         expensesTable.setPrice("100");
         expensesTable.setDat("01.01.2016");
-        expensesTable.setDescription("минералка");
+        expensesTable.setDescription("water");
         expensesTable.save();
 
     }
 
 
     public void insertCategori() {
-        if (CategoriesTable.getAllCategories().isEmpty()) {
+        if (CategoriesTable.getAllCategories("").isEmpty()) {
             List<String> cat = new ArrayList<>();
             cat.add("Food");
             cat.add("clothes");
