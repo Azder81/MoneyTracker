@@ -36,4 +36,6 @@ dependencies {
     // use kapt for kotlin apt
     compile "com.github.Raizlabs.DBFlow:dbflow-core:3.0.0-beta6"
     compile "com.github.Raizlabs.DBFlow:dbflow:3.0.0-beta6"
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
 }
