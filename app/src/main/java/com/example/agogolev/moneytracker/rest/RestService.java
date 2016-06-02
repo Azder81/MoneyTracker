@@ -1,5 +1,6 @@
 package com.example.agogolev.moneytracker.rest;
 
+import com.example.agogolev.moneytracker.rest.models.UserLoginModel;
 import com.example.agogolev.moneytracker.rest.models.UserRegistrationModel;
 
 /**
@@ -16,5 +17,9 @@ public class RestService {
 
     public UserRegistrationModel register(String login, String password) {
         return restClient.getRegisterUserAPI().registerUser(login, password, REGISTER_FLAG);
+    }
+
+    public UserLoginModel login(String login, String password) {
+        return restClient.getLoginUserAPI().logUser(login, password);
     }
 }

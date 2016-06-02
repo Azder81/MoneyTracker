@@ -7,6 +7,8 @@ import android.widget.EditText;
 
 import com.example.agogolev.moneytracker.R;
 import com.example.agogolev.moneytracker.rest.RestService;
+import com.example.agogolev.moneytracker.rest.models.UserLoginModel;
+import com.example.agogolev.moneytracker.rest.models.UserRegistrationModel;
 import com.example.agogolev.moneytracker.utils.NetworkStatusChecker;
 
 import org.androidannotations.annotations.Background;
@@ -23,19 +25,36 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
 
     @Background
-    @Click(R.id.login_button)
-    public void onLogin(View view) {
+    @Click(R.id.registation_button)
+    public void onRegistration(View view) {
 
         if (NetworkStatusChecker.isNetworkAvailable(getApplicationContext())) {
             if (inspectionEditText()) {
                 RestService restService = new RestService();
-                restService.register(login.getText().toString(), password.getText().toString());
+                UserRegistrationModel registrationModel = restService.register(login.getText().toString(), password.getText().toString());
             } else {
                 showMessage(view, "Login и password должны быть не менее 5 символов");
             }
         } else {
             showMessage(view, "Нет подключения к интернету :(");
         }
+    }
+
+    @Background
+    @Click(R.id.login_button)
+    public void onLogin(View view) {
+        if (NetworkStatusChecker.isNetworkAvailable(getApplicationContext())) {
+            if (inspectionEditText()) {
+                RestService restService = new RestService();
+                UserLoginModel userLoginModel = restService.login(login.getText().toString(), password.getText().toString());
+//                UserRegistrationModel registrationModel = restService.register(login.getText().toString(), password.getText().toString());
+            } else {
+                showMessage(view, "Login и password должны быть не менее 5 символов");
+            }
+        } else {
+            showMessage(view, "Нет подключения к интернету :(");
+        }
+
     }
 
     private boolean inspectionEditText() {

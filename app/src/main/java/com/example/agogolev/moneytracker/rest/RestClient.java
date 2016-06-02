@@ -7,6 +7,7 @@ public class RestClient {
 
     private static final String BASE_URL = "http://lmt.loftblog.tmweb.ru";
     private RegisterUserAPI registerUserAPI;
+    private LoginUserAPI loginUserAPI;
 
     public RestClient() {
         RestAdapter restAdapter = new RestAdapter.Builder()
@@ -18,6 +19,10 @@ public class RestClient {
 
     public RegisterUserAPI getRegisterUserAPI() {
         return registerUserAPI;
+    }
+
+    public LoginUserAPI getLoginUserAPI() {
+        return loginUserAPI;
     }
 }
 
