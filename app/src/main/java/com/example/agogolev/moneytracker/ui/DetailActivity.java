@@ -129,7 +129,7 @@ public class DetailActivity extends AppCompatActivity {
                 }).build();
 
         transaction.execute();
-//        http://futube.ru "Добавили Сумма: " + sum.getText() + "; Категория: " + categori, Snackbar.LENGTH_SHORT).show();
+
     }
 
     @Override

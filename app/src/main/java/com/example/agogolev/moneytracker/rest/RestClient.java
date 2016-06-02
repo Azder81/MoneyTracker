@@ -15,6 +15,7 @@ public class RestClient {
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         registerUserAPI = restAdapter.create(RegisterUserAPI.class);
+        loginUserAPI = restAdapter.create(LoginUserAPI.class);
     }
 
     public RegisterUserAPI getRegisterUserAPI() {
@@ -24,5 +25,6 @@ public class RestClient {
     public LoginUserAPI getLoginUserAPI() {
         return loginUserAPI;
     }
+
 }
 

@@ -5,9 +5,6 @@ import com.example.agogolev.moneytracker.rest.models.UserLoginModel;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
-/**
- * Created by AGogolev on 02.06.2016.
- */
 public interface LoginUserAPI {
 
     @GET("/auth")

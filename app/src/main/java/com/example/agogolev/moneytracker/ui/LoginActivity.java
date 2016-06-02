@@ -1,5 +1,6 @@
 package com.example.agogolev.moneytracker.ui;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
             if (inspectionEditText()) {
                 RestService restService = new RestService();
                 UserRegistrationModel registrationModel = restService.register(login.getText().toString(), password.getText().toString());
+                if (registrationModel.getStatus().equals("success")) {
+                    startMainActivity();
+                } else if (registrationModel.getStatus().equals("Login busy already")) {
+                    showMessage(view, "Данный логин уже занят");
+                }
             } else {
                 showMessage(view, "Login и password должны быть не менее 5 символов");
             }
@@ -47,7 +53,15 @@ public class LoginActivity extends AppCompatActivity {
             if (inspectionEditText()) {
                 RestService restService = new RestService();
                 UserLoginModel userLoginModel = restService.login(login.getText().toString(), password.getText().toString());
-//                UserRegistrationModel registrationModel = restService.register(login.getText().toString(), password.getText().toString());
+                if (userLoginModel.getStatus().equals("success")) {
+                    startMainActivity();
+                } else if (userLoginModel.getStatus().equals("Wrong login")) {
+                    showMessage(view, "Неверный Login");
+                } else if (userLoginModel.getStatus().equals("Wrong password")) {
+                    showMessage(view, "Неверный пароль");
+                } else if (userLoginModel.getStatus().equals("Error")) {
+                    showMessage(view, "ОШИБКА!!!");
+                }
             } else {
                 showMessage(view, "Login и password должны быть не менее 5 символов");
             }
@@ -55,6 +69,11 @@ public class LoginActivity extends AppCompatActivity {
             showMessage(view, "Нет подключения к интернету :(");
         }
 
+    }
+
+    private void startMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+        startActivity(intent);
     }
 
     private boolean inspectionEditText() {
@@ -65,6 +84,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showMessage(View view, String mes) {
-        Snackbar.make(view, mes, Snackbar.LENGTH_SHORT);
+        Snackbar.make(view, mes, Snackbar.LENGTH_SHORT).show();
     }
 }
