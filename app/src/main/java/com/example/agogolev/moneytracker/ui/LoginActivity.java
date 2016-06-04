@@ -36,19 +36,20 @@ public class LoginActivity extends AppCompatActivity {
                 if (registrationModel.getStatus().equals("success")) {
                     startMainActivity();
                 } else if (registrationModel.getStatus().equals("Login busy already")) {
-                    showMessage(view, "Данный логин уже занят");
+                    showMessage(view, getString(R.string.war_lof_busy));
                 }
             } else {
-                showMessage(view, "Login и password должны быть не менее 5 символов");
+                showMessage(view, getString(R.string.war_no_log_pas));
             }
         } else {
-            showMessage(view, "Нет подключения к интернету :(");
+            showMessage(view, getString(R.string.war_no_internet));
         }
     }
 
     @Background
     @Click(R.id.login_button)
     public void onLogin(View view) {
+
         if (NetworkStatusChecker.isNetworkAvailable(getApplicationContext())) {
             if (inspectionEditText()) {
                 RestService restService = new RestService();
@@ -56,17 +57,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (userLoginModel.getStatus().equals("success")) {
                     startMainActivity();
                 } else if (userLoginModel.getStatus().equals("Wrong login")) {
-                    showMessage(view, "Неверный Login");
+                    showMessage(view, getString(R.string.war_wrong_log));
                 } else if (userLoginModel.getStatus().equals("Wrong password")) {
-                    showMessage(view, "Неверный пароль");
+                    showMessage(view, getString(R.string.war_wrong_pas));
                 } else if (userLoginModel.getStatus().equals("Error")) {
-                    showMessage(view, "ОШИБКА!!!");
+                    showMessage(view, getString(R.string.war_error));
                 }
             } else {
-                showMessage(view, "Login и password должны быть не менее 5 символов");
+                showMessage(view, getString(R.string.war_no_log_pas));
             }
         } else {
-            showMessage(view, "Нет подключения к интернету :(");
+            showMessage(view, getString(R.string.war_no_internet));
         }
 
     }
