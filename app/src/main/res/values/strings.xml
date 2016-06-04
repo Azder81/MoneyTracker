@@ -21,5 +21,18 @@
     <string name="date_exp">"Дата"</string>
     <string name="button1">"Добавить"</string>
 
+    <!--For activity login-->
     <string name="search_titel">"поиск"</string>
+    <string name="login_text">"Логин"</string>
+    <string name="password_text">"Пароль"</string>
+    <string name="button_login">"Войти"</string>
+    <string name="button_registration">"Регистрация"</string>
+
+    <!--For Snackbar warning-->
+    <string name="war_no_internet">"Нет подключения к интернету :("</string>
+    <string name="war_no_log_pas">""Login и password должны быть не менее 5 символов</string>
+    <string name="war_lof_busy">"Данный логин уже занят"</string>
+    <string name="war_wrong_log">"Неверный Login"</string>
+    <string name="war_wrong_pas">"Неверный пароль"</string>
+    <string name="war_error">"ОШИБКА!!!"</string>
 </resources>
