@@ -27,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             startLoginActivity();
         }
-//        SharedPreferences.Editor editor = sPref.edit()
     }
 
     void startLoginActivity() {

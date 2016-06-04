@@ -39,4 +39,8 @@ public class UserLoginModel {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getAuthToken() {
+        return authToken;
+    }
 }

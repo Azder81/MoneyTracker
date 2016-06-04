@@ -1,6 +1,8 @@
 package com.example.agogolev.moneytracker.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,6 +21,10 @@ import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends AppCompatActivity {
+
+    final static String SET_LOGIN = "token";
+    final static String TOKEN = "login token";
+    SharedPreferences sPref;
 
     @ViewById
     EditText login;
@@ -55,6 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                 RestService restService = new RestService();
                 UserLoginModel userLoginModel = restService.login(login.getText().toString(), password.getText().toString());
                 if (userLoginModel.getStatus().equals("success")) {
+                    sPref = getSharedPreferences(SET_LOGIN, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sPref.edit();
+                    editor.putString(TOKEN, userLoginModel.getAuthToken());
+                    editor.apply();
                     startMainActivity();
                 } else if (userLoginModel.getStatus().equals("Wrong login")) {
                     showMessage(view, getString(R.string.war_wrong_log));
